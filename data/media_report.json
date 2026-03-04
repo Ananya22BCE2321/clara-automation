@@ -1,0 +1,50 @@
+{
+  "found": [
+    {
+      "path": "data\\demo\\audio1975518882.m4a",
+      "type": "audio",
+      "size_bytes": 15895842,
+      "original_name": "audio1975518882.m4a",
+      "action": "move-to-raw"
+    },
+    {
+      "path": "data\\demo\\recording.conf",
+      "type": "unknown",
+      "size_bytes": 126,
+      "original_name": "recording.conf",
+      "action": "move-to-raw"
+    },
+    {
+      "path": "data\\demo\\video1975518882.mp4",
+      "type": "video",
+      "size_bytes": 191228103,
+      "original_name": "video1975518882.mp4",
+      "action": "move-to-raw"
+    },
+    {
+      "path": "data\\onboarding\\audio1975518882.m4a",
+      "type": "audio",
+      "size_bytes": 15895842,
+      "original_name": "audio1975518882.m4a",
+      "action": "move-to-raw"
+    },
+    {
+      "path": "data\\onboarding\\recording.conf",
+      "type": "unknown",
+      "size_bytes": 126,
+      "original_name": "recording.conf",
+      "action": "move-to-raw"
+    },
+    {
+      "path": "data\\onboarding\\video1975518882.mp4",
+      "type": "video",
+      "size_bytes": 191228103,
+      "original_name": "video1975518882.mp4",
+      "action": "move-to-raw"
+    }
+  ],
+  "summary": {
+    "total_files": 6,
+    "total_size_bytes": 414248142
+  }
+}
