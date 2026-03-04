@@ -1,0 +1,92 @@
+{
+  "name": "Clara Automation Pipeline",
+  "description": "End-to-end automation pipeline for extracting account memos from transcripts and generating Retell voice agent configurations",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Ingest Transcript",
+      "type": "file_trigger",
+      "description": "Watches data/demo/ or data/onboarding/ for .txt files"
+    },
+    {
+      "id": "2",
+      "name": "Assign Account ID",
+      "type": "transform",
+      "description": "Uses filename stem as account_id"
+    },
+    {
+      "id": "3",
+      "name": "Extract Account Memo",
+      "type": "python_script",
+      "script": "extractor.py",
+      "description": "Runs extract_demo_data() or extract_onboarding_updates()"
+    },
+    {
+      "id": "4",
+      "name": "Generate Agent Spec",
+      "type": "python_script",
+      "script": "agent_generator.py",
+      "description": "Runs generate_agent_spec() to produce RetellAgentSpec"
+    },
+    {
+      "id": "5",
+      "name": "Save Outputs",
+      "type": "python_script",
+      "script": "storage.py",
+      "description": "Saves memo.json and agent_spec.json to outputs/accounts/"
+    },
+    {
+      "id": "6",
+      "name": "Create Task",
+      "type": "python_script",
+      "script": "task_tracker.py",
+      "description": "Appends entry to tasks/tasks.json"
+    },
+    {
+      "id": "7",
+      "name": "Apply Patch (Onboarding only)",
+      "type": "python_script",
+      "script": "patcher.py",
+      "description": "Merges onboarding updates into v1 memo to produce v2 + changelog"
+    },
+    {
+      "id": "8",
+      "name": "Save Changelog",
+      "type": "python_script",
+      "script": "storage.py",
+      "description": "Saves changelog JSON and changes.md to changelogs/"
+    }
+  ],
+  "connections": [
+    {
+      "from": "1",
+      "to": "2"
+    },
+    {
+      "from": "2",
+      "to": "3"
+    },
+    {
+      "from": "3",
+      "to": "4"
+    },
+    {
+      "from": "4",
+      "to": "5"
+    },
+    {
+      "from": "5",
+      "to": "6"
+    },
+    {
+      "from": "3",
+      "to": "7",
+      "condition": "onboarding_mode"
+    },
+    {
+      "from": "7",
+      "to": "8"
+    }
+  ],
+  "setup_instructions": "Run locally via: python -m batch_runner --demo OR --onboarding. No n8n installation required. Each node corresponds to a Python script that can be wrapped in an n8n Execute Command node if desired."
+}
