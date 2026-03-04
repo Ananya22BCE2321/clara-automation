@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="post">
+    <button name="action" value="demo">Run Demo Pipeline</button>
+    <button name="action" value="onboarding">Run Onboarding Pipeline</button>
+    <button name="action" value="summary">Generate Summary</button>
+  </form>
+
+  {% if log %}
+    <h2>Output</h2>
+    <pre>{{ log }}</pre>
+  {% endif %}
+{% endblock %}
